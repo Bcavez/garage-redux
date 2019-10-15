@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { fetchCars } from '../actions/index';
 
@@ -25,7 +26,11 @@ class CarsIndex extends Component {
   render() {
     return (
       <div className="view-container">
-        <div className="aside">GARAGENAME</div>
+        <div className="aside">
+          <Link to={`/${this.props.match.params.garage}/new`}>
+            Add a Car
+          </Link>
+        </div>
         <div className="list-container">
           <ul>
             {this.props.cars.map(this.renderList)}
