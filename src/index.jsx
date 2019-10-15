@@ -4,10 +4,13 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import reduxPromise from 'redux-promise';
 import logger from 'redux-logger';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { createHistory as history } from 'history';
 
+import carsReducer from './reducers/cars_reducer';
+
 import '../assets/stylesheets/application.scss';
+import CarsIndex from './containers/cars_index';
 
 const garageName = "asd";
 
@@ -33,8 +36,8 @@ ReactDOM.render(
   <Provider store={createStore(reducers, initialState, middlewares)}>
     <Router history={history}>
       <Switch>
-        <Route path="/:garage" component={carsIndex}/>
-        <Redirect from="/" to="/:garage" />
+        <Route path="/:garage" component={CarsIndex}/>
+        <Redirect from="/" to="/asd" />
       </Switch>
     </Router>
   </Provider>,
