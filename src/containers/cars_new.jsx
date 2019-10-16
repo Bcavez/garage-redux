@@ -15,6 +15,8 @@ class CarsNew extends Component {
   }
 
   renderField(field) {
+    console.log(field);
+    console.log(field.label);
     return (
       <div className="form-group">
         <label>{field.label}</label>
@@ -23,11 +25,17 @@ class CarsNew extends Component {
           type={field.type}
           {...field.input}
         />
+        {field.meta.touched && ((field.meta.error && <span>{field.meta.error}</span>) || (field.meta.warning && <span>{field.meta.warning}</span>))}
       </div>
     );
   }
 
   render() {
+
+    const required = value => value ? undefined : 'Required';
+    const tooOld = value =>
+      value && value > 65 ? 'You might be too old for this' : undefined;
+
     return (
       <div className="view-container">
         <div className="aside">
@@ -42,24 +50,29 @@ class CarsNew extends Component {
              name="brand"
              type="text"
              component={this.renderField}
+             validate={ required }
             />
             <Field
              label="model"
              name="model"
              type="text"
              component={this.renderField}
+             validate={ required }
             />
             <Field
              label="owner"
              name="owner"
              type="text"
              component={this.renderField}
+             validate={ required }
             />
             <Field
              label="plate"
              name="plate"
              type="text"
              component={this.renderField}
+             validate={ required }
+             warn={ tooOld }
             />
             <button type="submit"
             disabled={this.props.pristine || this.props.submitting}
