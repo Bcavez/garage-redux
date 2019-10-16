@@ -17,6 +17,9 @@ class CarsIndex extends Component {
           <li>
             <p>{car.brand} {car.model}</p>
             <p>Owner: {car.owner}</p>
+            <Link to={`/${this.props.match.params.garage}/cars/${car.id}`}>
+              See more
+            </Link>
           </li>
         </div>
       </div>

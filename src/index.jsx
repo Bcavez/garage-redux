@@ -9,10 +9,12 @@ import { createHistory as history } from 'history';
 import { reducer as formReducer } from 'redux-form';
 
 import carsReducer from './reducers/cars_reducer';
+import carReducer from './reducers/car_reducer';
 
 import '../assets/stylesheets/application.scss';
 import CarsIndex from './containers/cars_index';
 import CarsNew from './containers/cars_new';
+import CarShow from './containers/car_show';
 
 const garageName = "asd";
 
@@ -29,7 +31,8 @@ const initialState = {
 const reducers = combineReducers({
   garage: (state = null, action) => state,
   cars: carsReducer,
-  form: formReducer
+  form: formReducer,
+  car: carReducer
 });
 
 const middlewares = applyMiddleware(reduxPromise, logger);
@@ -41,6 +44,7 @@ ReactDOM.render(
       <Switch>
         <Route path="/:garage" exact component={CarsIndex}/>
         <Redirect from="/" to="/asd" exact />
+        <Route from="/:garage/cars/:id" exact component={CarShow}/>
         <Route path="/:garage/new" component={CarsNew}/>
       </Switch>
     </Router>
